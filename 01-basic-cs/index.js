@@ -30,8 +30,27 @@ const assert = require('assert');
 
 const database = require('./database.json');
 
+const numHat=3
+const topHat =(numHats)=>{
+    const hats={}
+    let count=0
+    numHats.forEach(client => {
+        if(client.hats.length> 0){
+            client.hats.forEach((hat)=>
+                hats[hat.id] = !hats[hat.id] ? 1 :  hats[hat.id] +=1
+            )
+        }
+    });
 
-const total = 0 // TODO
+    Object.keys(hats)
+        .map((hat)=>({id:hat,quantity: hats[hat]}))
+        .sort((a,b)=>b.quantity-a.quantity)
+        .slice(0,numHat)
+        .map((hat)=> {count = count + parseInt(hat.quantity)})
+    return (count);
+}
+
+const total = topHat(database) // TODO
 
 // Throws error on failure
 assert.equal(total, 23, `Invalid result: ${total} != 23`);
