@@ -47,6 +47,12 @@ export default class MyApp extends React.Component {
 class List extends React.Component {
   // TODO
   render() {
-    return null;
+    return (
+      <div>
+        {this.props.children}
+        {this.props.dates.map((date,key)=>
+          <li key={key} onClick={()=>alert(key)}>({moment(date).format('d/MMM/YYYY')})</li>
+        )}
+      </div>)
   }
 }
